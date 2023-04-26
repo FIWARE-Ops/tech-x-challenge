@@ -56,35 +56,35 @@ To provide a secure way to enable self-registration, an OnBoarding-Service based
 ```
 
 [^2]: Compliancy Credential: 
-```json
-{
-  "@context": [
-    "https://www.w3.org/2018/credentials/v1",
-    "http://gx-registry-development:3000/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
-  ],
-  "type": [
-    "VerifiableCredential"
-  ],
-  "id": "https://storage.gaia-x.eu/credential-offers/b3e0a068-4bf8-4796-932e-2fa83043e203",
-  "issuer": "did:web:compliance.lab.gaia-x.eu:development",
-  "issuanceDate": "2023-04-26T09:19:11.791Z",
-  "expirationDate": "2023-07-25T09:19:11.791Z",
-  "credentialSubject": [
-    {
-      "type": "gx:compliance",
-      "id": "did:web:raw.githubusercontent.com:egavard:payload-sign:master",
-      "integrity": "sha256-9fc56e0099742e57d467156c4526ba723981b2e91eb0ccf6b725ec65b968fcc8"
-    }
-  ],
-  "proof": {
-    "type": "JsonWebSignature2020",
-    "created": "2023-04-26T09:19:12.415Z",
-    "proofPurpose": "assertionMethod",
-    "jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..bSsi9yohByC9021w1AiLvzgIozgYqTAWLBkEWC8Qay043k81p6UzWfZ04rFv48agxkzDHwCxlFGO_N24SLJvHieZwRJnyoM-VfIYfSJ-9iTI07TMQl-wd03sO5x4R8YWIDeSd3hoWkn5csmQYhQlXmwLRKpMni0qgMMmMTR336XkSImq5NpEiB8QzwJVkmjn4oHHELwEPa3HSfAl42lTUvAwQceaNU288QrPC0ykRW4mdPmKk5TXgkf19tolj8xwhr-pncVv_0D7LH3bYoFzzvNBeQQZ3LOT5tr9QD6AjIJN126gX1ia6gMdmj5SKT_7KgtWk9npsKg3hggpbnihBA",
-    "verificationMethod": "did:web:compliance.lab.gaia-x.eu:development"
-  }
-}
-```
+	```json
+	{
+	  "@context": [
+	    "https://www.w3.org/2018/credentials/v1",
+	    "http://gx-registry-development:3000/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+	  ],
+	  "type": [
+	    "VerifiableCredential"
+	  ],
+	  "id": "https://storage.gaia-x.eu/credential-offers/b3e0a068-4bf8-4796-932e-2fa83043e203",
+	  "issuer": "did:web:compliance.lab.gaia-x.eu:development",
+	  "issuanceDate": "2023-04-26T09:19:11.791Z",
+	  "expirationDate": "2023-07-25T09:19:11.791Z",
+	  "credentialSubject": [
+	    {
+	      "type": "gx:compliance",
+	      "id": "did:web:raw.githubusercontent.com:egavard:payload-sign:master",
+	      "integrity": "sha256-9fc56e0099742e57d467156c4526ba723981b2e91eb0ccf6b725ec65b968fcc8"
+	    }
+	  ],
+	  "proof": {
+	    "type": "JsonWebSignature2020",
+	    "created": "2023-04-26T09:19:12.415Z",
+	    "proofPurpose": "assertionMethod",
+	    "jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..bSsi9yohByC9021w1AiLvzgIozgYqTAWLBkEWC8Qay043k81p6UzWfZ04rFv48agxkzDHwCxlFGO_N24SLJvHieZwRJnyoM-VfIYfSJ-9iTI07TMQl-wd03sO5x4R8YWIDeSd3hoWkn5csmQYhQlXmwLRKpMni0qgMMmMTR336XkSImq5NpEiB8QzwJVkmjn4oHHELwEPa3HSfAl42lTUvAwQceaNU288QrPC0ykRW4mdPmKk5TXgkf19tolj8xwhr-pncVv_0D7LH3bYoFzzvNBeQQZ3LOT5tr9QD6AjIJN126gX1ia6gMdmj5SKT_7KgtWk9npsKg3hggpbnihBA",
+	    "verificationMethod": "did:web:compliance.lab.gaia-x.eu:development"
+	  }
+	}
+	```
 
 [^3]: Legal Person Credential: 
 ```json
