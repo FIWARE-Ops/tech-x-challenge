@@ -4,7 +4,7 @@ This repository contains information about the hackathon "Gaia-X compliant Trust
 
 ## The Use-Case
 
-[i4Trust](https://i4trust.org/) is a Trust and IAM framework, used for building collaborative dataspaces, based on [FIWARE](https://www.fiware.org/) and [iShare](https://dev.ishareworks.org/index.html). Access to data and services in those dataspaces is protected through a decentralized IAM framework, where individual clients dont have to be registered individually, but can be vouched for by existing participants, that are already trusted inside the dataspace. 
+[i4Trust](https://i4trust.org/) is a Trust and IAM framework, used for building collaborative dataspaces, based on [FIWARE](https://www.fiware.org/) and [iShare](https://dev.ishareworks.org/index.html). Access to data and services in those dataspaces is protected through a decentralized IAM framework, where individual clients dont have to be registered individually, but can be vouched for by existing participants, that are already trusted inside the dataspace. The trust between the participants is provided through a trust-anchor service, called "iShare-Satellite". It implements a list of trusted participants, which can be used by the companies to ensure they are only talking to trusted partners.
 
 This framework for example allows to offer services through a marketplace, where participants of the dataspace can sell and buy access to each others services. In our use-case, a company called ```Packet Delivery Co.``` is offering digital serivces around its "traditional" logistics services. Participants in the dataspace can buy access to those services and offer them to there customers. ```Packet Delivery Co.``` currently offers two types of services, the "Gold-Service" and the "Standard-Service". Users with access to "Gold-Services" are allowed to not only access information about there Packet-Deliveries(e.g. planned time of arrival), but also can change those values to better fit there needs(e.g. deliver when I'm at home). Users with "Standard-Service" can only see the times, but not change them. 
 In our use-case, the company ```No Cheaper Inc.``` is running an online shop, selling variuous goods on small prices. They use ```Packet Delivery Co.``` to deliver those products, but don't want to offer their users additional benefits. Therefor it has only bought "Standard-Services", which allows the users to view the planned arrivals.
@@ -54,85 +54,95 @@ Once this is done, ```Animal Goods Org.``` can access the marketplace and also b
 [^2]: Compliancy Credential: 
     ```json
     {
-    "@context": [
-        "https://www.w3.org/2018/credentials/v1",
-        "http://gx-registry-development:3000/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
-    ],
-    "type": [
-        "VerifiableCredential"
-    ],
-    "id": "https://storage.gaia-x.eu/credential-offers/b3e0a068-4bf8-4796-932e-2fa83043e203",
-    "issuer": "did:web:compliance.lab.gaia-x.eu:development",
-    "issuanceDate": "2023-04-26T09:19:11.791Z",
-    "expirationDate": "2023-07-25T09:19:11.791Z",
-    "credentialSubject": [
-        {
-        "type": "gx:compliance",
-        "id": "did:web:raw.githubusercontent.com:egavard:payload-sign:master",
-        "integrity": "sha256-9fc56e0099742e57d467156c4526ba723981b2e91eb0ccf6b725ec65b968fcc8"
+        "@context": [
+            "https://www.w3.org/2018/credentials/v1",
+            "http://gx-registry-development:3000/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+        ],
+        "type": [
+            "VerifiableCredential"
+        ],
+        "id": "https://storage.gaia-x.eu/credential-offers/b3e0a068-4bf8-4796-932e-2fa83043e203",
+        "issuer": "did:web:compliance.lab.gaia-x.eu:development",
+        "issuanceDate": "2023-04-26T09:19:11.791Z",
+        "expirationDate": "2023-07-25T09:19:11.791Z",
+        "credentialSubject": [
+            {
+            "type": "gx:compliance",
+            "id": "did:web:raw.githubusercontent.com:egavard:payload-sign:master",
+            "integrity": "sha256-9fc56e0099742e57d467156c4526ba723981b2e91eb0ccf6b725ec65b968fcc8"
+            }
+        ],
+        "proof": {
+            "type": "JsonWebSignature2020",
+            "created": "2023-04-26T09:19:12.415Z",
+            "proofPurpose": "assertionMethod",
+            "jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..bSsi9yohByC9021w1AiLvzgIozgYqTAWLBkEWC8Qay043k81p6UzWfZ04rFv48agxkzDHwCxlFGO_N24SLJvHieZwRJnyoM-VfIYfSJ-9iTI07TMQl-wd03sO5x4R8YWIDeSd3hoWkn5csmQYhQlXmwLRKpMni0qgMMmMTR336XkSImq5NpEiB8QzwJVkmjn4oHHELwEPa3HSfAl42lTUvAwQceaNU288QrPC0ykRW4mdPmKk5TXgkf19tolj8xwhr-pncVv_0D7LH3bYoFzzvNBeQQZ3LOT5tr9QD6AjIJN126gX1ia6gMdmj5SKT_7KgtWk9npsKg3hggpbnihBA",
+            "verificationMethod": "did:web:compliance.lab.gaia-x.eu:development"
         }
-    ],
-    "proof": {
-        "type": "JsonWebSignature2020",
-        "created": "2023-04-26T09:19:12.415Z",
-        "proofPurpose": "assertionMethod",
-        "jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..bSsi9yohByC9021w1AiLvzgIozgYqTAWLBkEWC8Qay043k81p6UzWfZ04rFv48agxkzDHwCxlFGO_N24SLJvHieZwRJnyoM-VfIYfSJ-9iTI07TMQl-wd03sO5x4R8YWIDeSd3hoWkn5csmQYhQlXmwLRKpMni0qgMMmMTR336XkSImq5NpEiB8QzwJVkmjn4oHHELwEPa3HSfAl42lTUvAwQceaNU288QrPC0ykRW4mdPmKk5TXgkf19tolj8xwhr-pncVv_0D7LH3bYoFzzvNBeQQZ3LOT5tr9QD6AjIJN126gX1ia6gMdmj5SKT_7KgtWk9npsKg3hggpbnihBA",
-        "verificationMethod": "did:web:compliance.lab.gaia-x.eu:development"
-    }
     }
     ```
 
 [^3]: Legal Person Credential: 
     ```json
     {
-    "type" : [ "VerifiableCredential", "LegalPersonCredential" ],
-    "@context" : [ "https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/jws-2020/v1" ],
-    "id" : "urn:uuid:2eff859a-1474-4e51-a897-0e1360fecff9",
-    "issuer" : "did:web:animalgoods.gaia-x.fiware.dev:did",
-    "issuanceDate" : "2023-04-26T09:41:32Z",
-    "issued" : "2023-04-26T09:41:32Z",
-    "validFrom" : "2023-04-26T09:41:32Z",
-    "expirationDate" : "2023-04-28T21:41:32Z",
-    "credentialSchema" : {
-        "id" : "https://raw.githubusercontent.com/FIWARE-Ops/tech-x-challenge/main/schema.json",
-        "type" : "FullJsonSchemaValidator2021"
-    },
-    "credentialSubject" : {
-        "id" : "d7704c3f-4f13-474d-980c-6036ef670157",
-        "type" : "gx:NaturalParticipant",
-        "familyName" : "Happy",
-        "firstName" : "User",
-        "roles" : [ {
-        "names" : [ "LEGAL_REPRESENTATIVE" ],
-        "target" : "did:web:onboarding.gaia-x.fiware.dev:did"
-        } ],
-        "email" : "legal-representative@happypets.org"
-    },
-    "proof" : {
-        "type" : "JsonWebSignature2020",
-        "creator" : "did:web:animalgoods.gaia-x.fiware.dev:did",
-        "created" : "2023-04-26T09:41:32Z",
-        "verificationMethod" : "did:web:animalgoods.gaia-x.fiware.dev:did#4057b20fdc4a4c25abaab4f44de95c0f",
-        "jws" : "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJQUzI1NiJ9..Wm4S4chhXVYAibziWZ6HFUntav8xQz6iG9Lc-qyjnmeHeDrPvOnEMbKqQ1EmKzRhq1XHVl_yTEKo0T5F26ArbDokvaz-dK9LPa3PNkY8S-s5CAi5ufAIuO8FFqbCmonGr140U9_iLGYqaXEYpK9-AjmKl_-jB88jFlBxapbKEKGdHH1vrhggL_xbNmgbcRlueRgOWmHzy2RhFnzHxmpiCl6cvsHKB6dT-Q-VfBvwYExrJqGzLiGvxcNcqKnZ1OVEmaI7KPKQ8GBTvdp7P46gEVLlW_BQYdv3uDlHnoTZhz4ufJBLwMqiYrXvMmmscllnH_BUv2lUYXPRRBdSBD3EBA"
-    }
+        "type" : [ "VerifiableCredential", "LegalPersonCredential" ],
+        "@context" : [ "https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/jws-2020/v1" ],
+        "id" : "urn:uuid:2eff859a-1474-4e51-a897-0e1360fecff9",
+        "issuer" : "did:web:animalgoods.gaia-x.fiware.dev:did",
+        "issuanceDate" : "2023-04-26T09:41:32Z",
+        "issued" : "2023-04-26T09:41:32Z",
+        "validFrom" : "2023-04-26T09:41:32Z",
+        "expirationDate" : "2023-04-28T21:41:32Z",
+        "credentialSchema" : {
+            "id" : "https://raw.githubusercontent.com/FIWARE-Ops/tech-x-challenge/main/schema.json",
+            "type" : "FullJsonSchemaValidator2021"
+        },
+        "credentialSubject" : {
+            "id" : "d7704c3f-4f13-474d-980c-6036ef670157",
+            "type" : "gx:NaturalParticipant",
+            "familyName" : "Happy",
+            "firstName" : "User",
+            "roles" : [ {
+            "names" : [ "LEGAL_REPRESENTATIVE" ],
+            "target" : "did:web:onboarding.gaia-x.fiware.dev:did"
+            } ],
+            "email" : "legal-representative@happypets.org"
+        },
+        "proof" : {
+            "type" : "JsonWebSignature2020",
+            "creator" : "did:web:animalgoods.gaia-x.fiware.dev:did",
+            "created" : "2023-04-26T09:41:32Z",
+            "verificationMethod" : "did:web:animalgoods.gaia-x.fiware.dev:did#4057b20fdc4a4c25abaab4f44de95c0f",
+            "jws" : "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJQUzI1NiJ9..Wm4S4chhXVYAibziWZ6HFUntav8xQz6iG9Lc-qyjnmeHeDrPvOnEMbKqQ1EmKzRhq1XHVl_yTEKo0T5F26ArbDokvaz-dK9LPa3PNkY8S-s5CAi5ufAIuO8FFqbCmonGr140U9_iLGYqaXEYpK9-AjmKl_-jB88jFlBxapbKEKGdHH1vrhggL_xbNmgbcRlueRgOWmHzy2RhFnzHxmpiCl6cvsHKB6dT-Q-VfBvwYExrJqGzLiGvxcNcqKnZ1OVEmaI7KPKQ8GBTvdp7P46gEVLlW_BQYdv3uDlHnoTZhz4ufJBLwMqiYrXvMmmscllnH_BUv2lUYXPRRBdSBD3EBA"
+        }
     }
     ```
 
-
 ## The Challenge
 
+![Overview](./img/overview.svg)
 
-## Demo environment
+While the i4Trust framework for Dataspaces is well established, working and already used in multiple dataspaces(see [i4Trust experiments](https://i4trust.org/experiments/)) and a solution for the OnBoarding-Service, combining the i4Trust IAM-Framework with Gaia-X compliancy, there integration is yet to be finished.
 
-The demo environment consists of two participants:
+In order to properly on-board new participants to an i4Trust-Dataspace, the [Satellite-Implementation](https://github.com/FIWARE/ishare-satellite) needs to be evolved to get participant information from the OnBoarding-Service. 
+Therefor, in the hackathon, we want to implement:
+* an [EBSI Trusted Issuers Registry](https://api-pilot.ebsi.eu/docs/apis/trusted-issuers-registry/latest#/) compliant endpoint, based on the NGSI-LD Api. This could either be an extension to the already existing Satellite-implementation or a completely new service.
+* [optional] Implement additional endpoints from the [satellite-api](https://github.com/FIWARE/ishare-satellite/tree/main/api)([Spec](https://dev.ishare.eu/scheme-owner/parties-id.html)) 
+* [optional] Extend the LegalPerson-Credential to include iShare-related data, like the certificate or the EORI
 
-- did:web:participant.gaia-x.fiware.dev:did - an example participant, which will self-register at the onboarding service
-- did:web:onboarding.gaia-x.fiware.dev:did(also using EU.EORI.DEONE to represent itself in iShare-components) - the onboarding service itself
+Goal: 
+In order to show the improvements to the integration, the following steps should be presented:
+* issue a Self-Description for Animal Goods Org.[^4]
+* get a Compliancy Credential[^5]
+* get a NaturalPerson Credential for Happypets
+* register Animal Goods Org. at the [OnBoarding-Portal](https://portal.gaia-x.fiware.dev/)
+* take just the NaturalPerson credential and verify it against the new service[^6]
 
+[^4] The [FIWARE Demo-Wallet](demo-wallet.fiware.dev) and the [Animal Goods Org. Keycloak](animalgoods-kc.gaia-x.fiware.dev) can be used for example.
+[^5] To make issuing easier, a compliancy service trusting our participants is provided at [https://compliance.gaia-x.fiware.dev](https://compliance.gaia-x.fiware.dev/docs/#/credential-offer/CommonController_issueVC) 
+[^6] Verfiy for example at [Walt-id](https://kong.gaia-x.fiware.dev/walt/v1/verify)
 
-
-
-## Setup 
+## Demo Setup 
 
 All components are deployed via GitOps. The deployments can be found at: https://github.com/FIWARE-Ops/fiware-gitops/tree/master/aws/gaia-x
 
