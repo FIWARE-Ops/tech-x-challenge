@@ -14,123 +14,113 @@ In our use-case, the company ```No Cheaper Inc.``` is running an online shop, se
 Happy Pets' competitor ```Animal Goods Org.``` decides to also offer its customers the services of ```Packet Delivery Co.```. Since they are quite new on the market, they are not yet part of the dataspace. In order to do so, they have to properly on-board themself to the dataspace and then can also buy access. For doing so, it create a [Gaia-X compliant self-description](https://gaia-x.gitlab.io/policy-rules-committee/trust-framework/)[^1], containing various legal informations required for companies in the european union. To proof the legitimacy of those informations, they get a ```Compliancy Credential``` from  the [Gaia-X Compliancy Service](https://compliance.lab.gaia-x.eu/development/docs/#/Common/CommonController_issueVC)[^2]. With those two credentials, a legal representative can use the OnBoarding-Service of the dataspace to register ```Animal Goods Org.``` as a new participant. The representative identifies itself with a credential[^3], too. 
 
 Once this is done, ```Animal Goods Org.``` can access the marketplace and also buy the "Gold-Service" for its customers.
-FIWARE implements a [Trust and IAM framework](https://i4trust.github.io/building-blocks/docs/i4Trust-BuildingBlocks_v4.0_UnderReview.pdf), which allows to secure access to APIs based on VerfiableCredentials. This framework can be used in Dataspaces, to enable decentralized identity management, while allowing the individual service providers to apply fine-grained authorization to there APIs. 
-In order to participate in such Dataspace, an organisation needs to be onboarded. An onboarded participant is added to the Trusted Participants List of the Dataspace and therfor able to interact with other members of the Dataspace. 
-
-To provide a secure way to enable self-registration, an OnBoarding-Service based on [Gaia-X compliant credentials](https://gaia-x.gitlab.io/policy-rules-committee/trust-framework/) was developed. In order to self-register to the Dataspace, a [LegalPerson](https://gaia-x.gitlab.io/policy-rules-committee/trust-framework/participant/) has to issue a self-description, like for example:
 
 [^1]: Example self-description: 
-```json
-{
-  "type" : [ "VerifiableCredential" ],
-  "@context" : [ "https://www.w3.org/2018/credentials/v1", "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#", "https://w3id.org/security/suites/jws-2020/v1" ],
-  "id" : "urn:uuid:a4c51032-1aab-46ba-8f51-68210a60cc27",
-  "issuer" : "did:web:animalgoods.gaia-x.fiware.dev:did",
-  "issuanceDate" : "2023-04-26T09:17:52Z",
-  "issued" : "2023-04-26T09:17:52Z",
-  "validFrom" : "2023-04-26T09:17:52Z",
-  "expirationDate" : "2023-04-28T21:17:52Z",
-  "credentialSubject" : {
-    "id" : "did:web:animalgoods.gaia-x.fiware.dev:did",
-    "type" : "gx:LegalParticipant",
-    "gx:legalName" : "Animal Goods Org.",
-    "gx:legalRegistrationNumber" : {
-      "gx:vatID" : "MYVATID"
-    },
-    "gx:headquarterAddress" : {
-      "gx:countrySubdivisionCode" : "BE-BRU"
-    },
-    "gx:legalAddress" : {
-      "gx:countrySubdivisionCode" : "BE-BRU"
-    },
-    "gx-terms-and-conditions:gaiaxTermsAndConditions" : "70c1d713215f95191a11d38fe2341faed27d19e083917bc8732ca4fea4976700"
-  },
-  "proof" : {
-    "type" : "JsonWebSignature2020",
-    "creator" : "did:web:animalgoods.gaia-x.fiware.dev:did",
-    "created" : "2023-04-26T09:17:52Z",
-    "verificationMethod" : "did:web:animalgoods.gaia-x.fiware.dev:did#e1b0c827edd5446ebb830d9a8b9b748c",
-    "jws" : "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJQUzI1NiJ9..SGj9KmaiowH2NOVJtWDN9tnAN4MivHJ2QdijCbTv-7V3ZXXtXrLI7qNkOMyxX9LwJv83S6USWFNoqWiluB8CiGYkfFe1FexqWBbodIIqxCM0xO7k2y78Zy_aMTjWkcFuKeGtELL6VeBnQglQauAOMOX60_-TRxNp96K8bJ-8O7EfJQhJnDVq5Dx6XE6oG4_vQyeDPafxb1_JmtjqG0aZ5b8ZRjPYkCYzpeomV4hAtOCT8xN7W6d7vAw07IeVZ_mcvk4OmS6hKND2x3g_gLfroTf43kx0sI-HeD6x4F3wCb_yFvxzolXZ4yI-f-JHalTwFuLJUKlrhNPsjse1eqRGCQ"
-  }
-}
-```
+    ```json
+    {
+        "type" : [ "VerifiableCredential" ],
+        "@context" : [ "https://www.w3.org/2018/credentials/v1", "https://registry.lab.gaia-x.eu/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#", "https://w3id.org/security/suites/jws-2020/v1" ],
+        "id" : "urn:uuid:a4c51032-1aab-46ba-8f51-68210a60cc27",
+        "issuer" : "did:web:animalgoods.gaia-x.fiware.dev:did",
+        "issuanceDate" : "2023-04-26T09:17:52Z",
+        "issued" : "2023-04-26T09:17:52Z",
+        "validFrom" : "2023-04-26T09:17:52Z",
+        "expirationDate" : "2023-04-28T21:17:52Z",
+        "credentialSubject" : {
+            "id" : "did:web:animalgoods.gaia-x.fiware.dev:did",
+            "type" : "gx:LegalParticipant",
+            "gx:legalName" : "Animal Goods Org.",
+            "gx:legalRegistrationNumber" : {
+            "gx:vatID" : "MYVATID"
+            },
+            "gx:headquarterAddress" : {
+            "gx:countrySubdivisionCode" : "BE-BRU"
+            },
+            "gx:legalAddress" : {
+            "gx:countrySubdivisionCode" : "BE-BRU"
+            },
+            "gx-terms-and-conditions:gaiaxTermsAndConditions" : "70c1d713215f95191a11d38fe2341faed27d19e083917bc8732ca4fea4976700"
+        },
+        "proof" : {
+            "type" : "JsonWebSignature2020",
+            "creator" : "did:web:animalgoods.gaia-x.fiware.dev:did",
+            "created" : "2023-04-26T09:17:52Z",
+            "verificationMethod" : "did:web:animalgoods.gaia-x.fiware.dev:did#e1b0c827edd5446ebb830d9a8b9b748c",
+            "jws" : "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJQUzI1NiJ9..SGj9KmaiowH2NOVJtWDN9tnAN4MivHJ2QdijCbTv-7V3ZXXtXrLI7qNkOMyxX9LwJv83S6USWFNoqWiluB8CiGYkfFe1FexqWBbodIIqxCM0xO7k2y78Zy_aMTjWkcFuKeGtELL6VeBnQglQauAOMOX60_-TRxNp96K8bJ-8O7EfJQhJnDVq5Dx6XE6oG4_vQyeDPafxb1_JmtjqG0aZ5b8ZRjPYkCYzpeomV4hAtOCT8xN7W6d7vAw07IeVZ_mcvk4OmS6hKND2x3g_gLfroTf43kx0sI-HeD6x4F3wCb_yFvxzolXZ4yI-f-JHalTwFuLJUKlrhNPsjse1eqRGCQ"
+        }
+    }
+    ```
 
 [^2]: Compliancy Credential: 
-	```json
-	{
-	  "@context": [
-	    "https://www.w3.org/2018/credentials/v1",
-	    "http://gx-registry-development:3000/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
-	  ],
-	  "type": [
-	    "VerifiableCredential"
-	  ],
-	  "id": "https://storage.gaia-x.eu/credential-offers/b3e0a068-4bf8-4796-932e-2fa83043e203",
-	  "issuer": "did:web:compliance.lab.gaia-x.eu:development",
-	  "issuanceDate": "2023-04-26T09:19:11.791Z",
-	  "expirationDate": "2023-07-25T09:19:11.791Z",
-	  "credentialSubject": [
-	    {
-	      "type": "gx:compliance",
-	      "id": "did:web:raw.githubusercontent.com:egavard:payload-sign:master",
-	      "integrity": "sha256-9fc56e0099742e57d467156c4526ba723981b2e91eb0ccf6b725ec65b968fcc8"
-	    }
-	  ],
-	  "proof": {
-	    "type": "JsonWebSignature2020",
-	    "created": "2023-04-26T09:19:12.415Z",
-	    "proofPurpose": "assertionMethod",
-	    "jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..bSsi9yohByC9021w1AiLvzgIozgYqTAWLBkEWC8Qay043k81p6UzWfZ04rFv48agxkzDHwCxlFGO_N24SLJvHieZwRJnyoM-VfIYfSJ-9iTI07TMQl-wd03sO5x4R8YWIDeSd3hoWkn5csmQYhQlXmwLRKpMni0qgMMmMTR336XkSImq5NpEiB8QzwJVkmjn4oHHELwEPa3HSfAl42lTUvAwQceaNU288QrPC0ykRW4mdPmKk5TXgkf19tolj8xwhr-pncVv_0D7LH3bYoFzzvNBeQQZ3LOT5tr9QD6AjIJN126gX1ia6gMdmj5SKT_7KgtWk9npsKg3hggpbnihBA",
-	    "verificationMethod": "did:web:compliance.lab.gaia-x.eu:development"
-	  }
-	}
-	```
+    ```json
+    {
+    "@context": [
+        "https://www.w3.org/2018/credentials/v1",
+        "http://gx-registry-development:3000/development/api/trusted-shape-registry/v1/shapes/jsonld/trustframework#"
+    ],
+    "type": [
+        "VerifiableCredential"
+    ],
+    "id": "https://storage.gaia-x.eu/credential-offers/b3e0a068-4bf8-4796-932e-2fa83043e203",
+    "issuer": "did:web:compliance.lab.gaia-x.eu:development",
+    "issuanceDate": "2023-04-26T09:19:11.791Z",
+    "expirationDate": "2023-07-25T09:19:11.791Z",
+    "credentialSubject": [
+        {
+        "type": "gx:compliance",
+        "id": "did:web:raw.githubusercontent.com:egavard:payload-sign:master",
+        "integrity": "sha256-9fc56e0099742e57d467156c4526ba723981b2e91eb0ccf6b725ec65b968fcc8"
+        }
+    ],
+    "proof": {
+        "type": "JsonWebSignature2020",
+        "created": "2023-04-26T09:19:12.415Z",
+        "proofPurpose": "assertionMethod",
+        "jws": "eyJhbGciOiJQUzI1NiIsImI2NCI6ZmFsc2UsImNyaXQiOlsiYjY0Il19..bSsi9yohByC9021w1AiLvzgIozgYqTAWLBkEWC8Qay043k81p6UzWfZ04rFv48agxkzDHwCxlFGO_N24SLJvHieZwRJnyoM-VfIYfSJ-9iTI07TMQl-wd03sO5x4R8YWIDeSd3hoWkn5csmQYhQlXmwLRKpMni0qgMMmMTR336XkSImq5NpEiB8QzwJVkmjn4oHHELwEPa3HSfAl42lTUvAwQceaNU288QrPC0ykRW4mdPmKk5TXgkf19tolj8xwhr-pncVv_0D7LH3bYoFzzvNBeQQZ3LOT5tr9QD6AjIJN126gX1ia6gMdmj5SKT_7KgtWk9npsKg3hggpbnihBA",
+        "verificationMethod": "did:web:compliance.lab.gaia-x.eu:development"
+    }
+    }
+    ```
 
 [^3]: Legal Person Credential: 
-```json
-{
-  "type" : [ "VerifiableCredential", "LegalPersonCredential" ],
-  "@context" : [ "https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/jws-2020/v1" ],
-  "id" : "urn:uuid:2eff859a-1474-4e51-a897-0e1360fecff9",
-  "issuer" : "did:web:animalgoods.gaia-x.fiware.dev:did",
-  "issuanceDate" : "2023-04-26T09:41:32Z",
-  "issued" : "2023-04-26T09:41:32Z",
-  "validFrom" : "2023-04-26T09:41:32Z",
-  "expirationDate" : "2023-04-28T21:41:32Z",
-  "credentialSchema" : {
-    "id" : "https://raw.githubusercontent.com/FIWARE-Ops/tech-x-challenge/main/schema.json",
-    "type" : "FullJsonSchemaValidator2021"
-  },
-  "credentialSubject" : {
-    "id" : "d7704c3f-4f13-474d-980c-6036ef670157",
-    "type" : "gx:NaturalParticipant",
-    "familyName" : "Happy",
-    "firstName" : "User",
-    "roles" : [ {
-      "names" : [ "LEGAL_REPRESENTATIVE" ],
-      "target" : "did:web:onboarding.gaia-x.fiware.dev:did"
-    } ],
-    "email" : "legal-representative@happypets.org"
-  },
-  "proof" : {
-    "type" : "JsonWebSignature2020",
-    "creator" : "did:web:animalgoods.gaia-x.fiware.dev:did",
-    "created" : "2023-04-26T09:41:32Z",
-    "verificationMethod" : "did:web:animalgoods.gaia-x.fiware.dev:did#4057b20fdc4a4c25abaab4f44de95c0f",
-    "jws" : "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJQUzI1NiJ9..Wm4S4chhXVYAibziWZ6HFUntav8xQz6iG9Lc-qyjnmeHeDrPvOnEMbKqQ1EmKzRhq1XHVl_yTEKo0T5F26ArbDokvaz-dK9LPa3PNkY8S-s5CAi5ufAIuO8FFqbCmonGr140U9_iLGYqaXEYpK9-AjmKl_-jB88jFlBxapbKEKGdHH1vrhggL_xbNmgbcRlueRgOWmHzy2RhFnzHxmpiCl6cvsHKB6dT-Q-VfBvwYExrJqGzLiGvxcNcqKnZ1OVEmaI7KPKQ8GBTvdp7P46gEVLlW_BQYdv3uDlHnoTZhz4ufJBLwMqiYrXvMmmscllnH_BUv2lUYXPRRBdSBD3EBA"
-  }
-}
-```
-In the configuration used for the Demo, a LegalPerson trying to access the OnBoarding-Service APIs can have the Roles ```LEGAL_REPRESENTATIVE``` or ```EMPLOYEE```. Only the ```LEGAL_REPRESENTATIVE``` will be allowed to add the participant to the trusted participants list. Users in Role ```EMPLOYEE``` will only be allowed to view the list of trusted-participants.
+    ```json
+    {
+    "type" : [ "VerifiableCredential", "LegalPersonCredential" ],
+    "@context" : [ "https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/jws-2020/v1" ],
+    "id" : "urn:uuid:2eff859a-1474-4e51-a897-0e1360fecff9",
+    "issuer" : "did:web:animalgoods.gaia-x.fiware.dev:did",
+    "issuanceDate" : "2023-04-26T09:41:32Z",
+    "issued" : "2023-04-26T09:41:32Z",
+    "validFrom" : "2023-04-26T09:41:32Z",
+    "expirationDate" : "2023-04-28T21:41:32Z",
+    "credentialSchema" : {
+        "id" : "https://raw.githubusercontent.com/FIWARE-Ops/tech-x-challenge/main/schema.json",
+        "type" : "FullJsonSchemaValidator2021"
+    },
+    "credentialSubject" : {
+        "id" : "d7704c3f-4f13-474d-980c-6036ef670157",
+        "type" : "gx:NaturalParticipant",
+        "familyName" : "Happy",
+        "firstName" : "User",
+        "roles" : [ {
+        "names" : [ "LEGAL_REPRESENTATIVE" ],
+        "target" : "did:web:onboarding.gaia-x.fiware.dev:did"
+        } ],
+        "email" : "legal-representative@happypets.org"
+    },
+    "proof" : {
+        "type" : "JsonWebSignature2020",
+        "creator" : "did:web:animalgoods.gaia-x.fiware.dev:did",
+        "created" : "2023-04-26T09:41:32Z",
+        "verificationMethod" : "did:web:animalgoods.gaia-x.fiware.dev:did#4057b20fdc4a4c25abaab4f44de95c0f",
+        "jws" : "eyJiNjQiOmZhbHNlLCJjcml0IjpbImI2NCJdLCJhbGciOiJQUzI1NiJ9..Wm4S4chhXVYAibziWZ6HFUntav8xQz6iG9Lc-qyjnmeHeDrPvOnEMbKqQ1EmKzRhq1XHVl_yTEKo0T5F26ArbDokvaz-dK9LPa3PNkY8S-s5CAi5ufAIuO8FFqbCmonGr140U9_iLGYqaXEYpK9-AjmKl_-jB88jFlBxapbKEKGdHH1vrhggL_xbNmgbcRlueRgOWmHzy2RhFnzHxmpiCl6cvsHKB6dT-Q-VfBvwYExrJqGzLiGvxcNcqKnZ1OVEmaI7KPKQ8GBTvdp7P46gEVLlW_BQYdv3uDlHnoTZhz4ufJBLwMqiYrXvMmmscllnH_BUv2lUYXPRRBdSBD3EBA"
+    }
+    }
+    ```
 
-
-[^1]: Registration can also be done automatically by a machine-user. For demonstrability pruposes, we focus on human interaction here.
 
 ## The Challenge
 
-* Implement a small service, that makes use of the registered issuers and provides them through a trusted participants list(for example, by implementing the issuers endpoint of the [EBSI Trusted Issuers Registry](https://api-pilot.ebsi.eu/docs/apis/trusted-issuers-registry/latest#/)). 
-> :bulb: The context broker storing the information is public available at 
-* Register a participant in the demo
 
 ## Demo environment
 
