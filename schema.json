@@ -1,0 +1,48 @@
+{
+    "$schema": "http://json-schema.org/draft-04/schema#",
+    "type": "object",
+    "properties": {
+      "type": {
+        "type": "string"
+      },
+      "familyName": {
+        "type": "string"
+      },
+      "firstName": {
+        "type": "string"
+      },
+      "roles": {
+        "type": "array",
+        "items": [
+          {
+            "type": "object",
+            "properties": {
+              "names": {
+                "type": "array",
+                "items": [
+                  {
+                    "type": "string"
+                  }
+                ]
+              },
+              "target": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "names",
+              "target"
+            ]
+          }
+        ]
+      }
+    },
+    "required": [
+      "type",
+      "familyName",
+      "firstName",
+      "roles"
+    ]
+  }
+  
+  
