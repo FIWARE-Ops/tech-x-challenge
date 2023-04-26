@@ -138,9 +138,9 @@ In order to show the improvements to the integration, the following steps should
 * register Animal Goods Org. at the [OnBoarding-Portal](https://portal.gaia-x.fiware.dev/)
 * take just the NaturalPerson credential and verify it against the new service[^6]
 
-[^4] The [FIWARE Demo-Wallet](demo-wallet.fiware.dev) and the [Animal Goods Org. Keycloak](animalgoods-kc.gaia-x.fiware.dev) can be used for example.
-[^5] To make issuing easier, a compliancy service trusting our participants is provided at [https://compliance.gaia-x.fiware.dev](https://compliance.gaia-x.fiware.dev/docs/#/credential-offer/CommonController_issueVC) 
-[^6] Verfiy for example at [Walt-id](https://kong.gaia-x.fiware.dev/walt/v1/verify)
+[^4]: The [FIWARE Demo-Wallet](demo-wallet.fiware.dev) and the [Animal Goods Org. Keycloak](animalgoods-kc.gaia-x.fiware.dev) can be used for example.
+[^5]: To make issuing easier, a compliancy service trusting our participants is provided at [https://compliance.gaia-x.fiware.dev](https://compliance.gaia-x.fiware.dev/docs/#/credential-offer/CommonController_issueVC) 
+[^6]: Verfiy for example at [Walt-id](https://kong.gaia-x.fiware.dev/walt/v1/verify)
 
 ## Demo Setup 
 
