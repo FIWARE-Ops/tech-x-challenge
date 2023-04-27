@@ -392,7 +392,8 @@ Policy creation follows the same steps for each of them:
 1. Get an API-Key. In order to make handling of iShare-JWT easier, the setup includes a token-helper. To not make all JWT publicly available, the token-helper is available through Kong via an API-Key. To retrieve the key use:
 
 ```shell
-    kubectl port-forward <THE_KONG_POD> 8001:8001 -n gaia-x
+    export KONG_POD=$(kubectl get pods -n gaia-x --no-headers -o custom-columns=":metadata.name" | grep kong)
+    kubectl port-forward ${KONG_POD} 8001:8001 -n gaia-x
     export API_KEY=$(curl --location 'localhost:8001/key-auths' | jq -r '.data[0].key')
 ```
 
