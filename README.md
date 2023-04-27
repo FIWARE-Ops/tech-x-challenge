@@ -176,7 +176,7 @@ The diagram shows the relevant components and their interaction. They are not ne
     * if allowed, it forwards the request to the ContextBroker to be answered
 5. :warning: Step 5 is not implemented yet, therefor becomes the challange. In order to connect the OnBoarding-Service with actual Dataspaces, a services implementing the [EBSI Trusted Issuers Registry API](https://api-pilot.ebsi.eu/docs/apis/trusted-issuers-registry/latest#/) retrieves the TrustedIssuers-Information from the ContextBroker and provide them to the Dataspace.  
 
-### Participant setup
+## Preparational Steps
 
 In order to work, both participants have to be registered in their corresponding Walt-Id instance.
 To do so, identify the instances running walt-id.
