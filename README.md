@@ -148,7 +148,7 @@ In order to show the improvements to the integration, the following steps should
 
 All components are deployed via GitOps. The deployments can be found at: https://github.com/FIWARE-Ops/fiware-gitops/tree/master/aws/gaia-x
 
-![Setup](./img/tech-x-setup.svg)
+![Setup](./img/tech-x-setup.png)
 
 The diagram shows the relevant components and their interaction. They are not necessarily in the provided sequence, but their are certain dependencies between some steps.
 
