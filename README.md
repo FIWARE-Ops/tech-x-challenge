@@ -82,10 +82,10 @@ Once this is done, ```Animal Goods Org.``` can access the marketplace and also b
     }
     ```
 
-[^3]: Legal Person Credential: 
+[^3]: Natural Person Credential: 
     ```json
     {
-        "type" : [ "VerifiableCredential", "LegalPersonCredential" ],
+        "type" : [ "VerifiableCredential", "NaturalPersonCredential" ],
         "@context" : [ "https://www.w3.org/2018/credentials/v1", "https://w3id.org/security/suites/jws-2020/v1" ],
         "id" : "urn:uuid:2eff859a-1474-4e51-a897-0e1360fecff9",
         "issuer" : "did:web:animalgoods.gaia-x.fiware.dev:did",
@@ -144,14 +144,37 @@ In order to show the improvements to the integration, the following steps should
 
 [^6]: Verfiy for example at [Walt-id](https://kong.gaia-x.fiware.dev/walt/v1/verify)
 
-## Demo Setup 
+## Demo Setup - The On-Boarding Service 
 
 All components are deployed via GitOps. The deployments can be found at: https://github.com/FIWARE-Ops/fiware-gitops/tree/master/aws/gaia-x
 
 ![Setup](./img/tech-x-setup.svg)
 
-The diagram shows the relevant components and their interaction. 
+The diagram shows the relevant components and their interaction. They are not necessarily in the provided sequence, but their are certain dependencies between some steps.
 
+1. The person("NaturalPerson") receives a LegalPerson-Credential[^1] and a NaturalPerson-Credential[^3], containing the self-descrption of the organisation and the identity of the user itself. The NaturalPerson-Credential is issued by the organisation described in the LegalPerson-Credential.
+    * The issuer([Keycloak](https://github.com/wistefan/keycloak-vc-issuer)) uses [WaltId](https://github.com/walt-id/waltid-ssikit) to get the actual credential
+    * WaltId maintains the DID(and corresponding private key) of the organization, therefor is also responsible to publish the did.json required for [did:web](https://w3c-ccg.github.io/did-method-web) - this happens through [route-rewriting](https://github.com/FIWARE-Ops/fiware-gitops/blob/master/aws/gaia-x/walt-id/templates/route.yaml#L10) to WaltId's [Core-API](https://docs.walt.id/v/ssikit/getting-started/rest-apis/core-api)
+    * the participant also publishes its certificate-chain, defined in the x5u-parameter of the did.json, as mandated by the Gaia-X complinacy service(in a real environment, the certificate-chain needs to be derived from a Gaia-X trusted CA. To ease the demo-environment, we use [Let's encrypt](https://letsencrypt.org/) provided certificates here)
+2. The person uses its wallet(on the mobile phone) to also retrieve a CompliancyCredential[^2] for the LegalPerson-Credential from the Gaia-X ComplinacyService
+    * the [FIWARE Demo-Wallet](demo-wallet.fiware.dev) provides a button to request such credential for any stored credential
+        ![CompliancyService in the wallet](./img/wallet-comp.png)
+    * the [Compliancyservice](https://gaia-x.gitlab.io/policy-rules-committee/trust-framework/trust_anchors/) will check the credential according to the Gaia-X rules and send back a credential to the wallet
+3. In order to OnBoard the participant(e.g. ```Animal Goods Org.```), the user accesses the [OnBoarding-Portal](https://portal.gaia-x.fiware.dev/)
+    * the portal will forward the user to the Login-Page of the verifier, which displays a QR-Code, containing all information to fullfil the [SIOP-2](https://openid.net/specs/openid-connect-self-issued-v2-1_0.html)/[OIDC4VP](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html)-Flow 
+    * the user scans the code with its wallet and let it send all credentials as a [VerfiablePresentation](https://www.w3.org/TR/vc-data-model/#dfn-verifiable-presentations)
+    * the verifier will now check all (3) credential it did receive:
+        * verify the signature, issuance-date and vaildity-timeframe for each of the credentials
+        * checks that the CompliancyCredential was issued by a CompliancyService registered in the Gaia-X Registry(see [demo-registry](https://registry.gaia-x.fiware.dev/development/api/complianceIssuers))
+        * checks that the CompliancyCredential actually proofs the compliancy of the LegalPerson-Credential and that the NaturalPerson-Credential was issued by the LegalPerson, thus building a chain-of-trust between the credentials up towards the Gaia-X CompliancyService
+    * creates a JWT containing the VerifiablePresentation and provide it to the portal via the [token-endpoint](https://datatracker.ietf.org/doc/html/rfc6749#page-21)
+4. The portal now uses the JWT to access the backend-services
+    * it requests the [Orion-LD ContextBroker](https://github.com/FIWARE/context.Orion-LD), using the [NGSI-LD Api](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_cim009v010601p.pdf) to get or create participants
+    * all requests go through the [Kong API-Gateway](https://konghq.com/)
+    * the requests are forwarded to the [DSBA-PDP](https://github.com/FIWARE/dsba-pdp) by the [PEP-Plugin](https://github.com/FIWARE/kong-plugins-fiware/tree/main/kong-pep-plugin) to get an authorization-decision
+    * the PDP checks the request in context of the roles inside then NaturalPerson-Credential, using the [iShare-compliant Authorization Registry](https://dev.ishare.eu/delegation/endpoint.html) 
+    * if allowed, it forwards the request to the ContextBroker to be answered
+5. :warning: Step 5 is not implemented yet, therefor becomes the challange. In order to connect the OnBoarding-Service with actual Dataspaces, a services implementing the [EBSI Trusted Issuers Registry API](https://api-pilot.ebsi.eu/docs/apis/trusted-issuers-registry/latest#/) retrieves the TrustedIssuers-Information from the ContextBroker and provide them to the Dataspace.  
 
 ### Participant setup
 
