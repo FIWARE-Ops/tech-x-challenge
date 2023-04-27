@@ -176,6 +176,65 @@ The diagram shows the relevant components and their interaction. They are not ne
     * if allowed, it forwards the request to the ContextBroker to be answered
 5. :warning: Step 5 is not implemented yet, therefor becomes the challange. In order to connect the OnBoarding-Service with actual Dataspaces, a services implementing the [EBSI Trusted Issuers Registry API](https://api-pilot.ebsi.eu/docs/apis/trusted-issuers-registry/latest#/) retrieves the TrustedIssuers-Information from the ContextBroker and provide them to the Dataspace.  
 
+### Available endpoints:
+
+| Address| Paths | Description | Security |  
+|--------|-------|-----------|----------|
+| https://portal.gaia-x.fiware.dev/ | | OnBoarding Portal | login via VerifiableCredentials |
+| https://animalgoods-kc.gaia-x.fiware.dev/ | realms/fiware-server/account/#/ | Keycloak of Animal Goods Org. for retrieving VCs | Users: ```legal-representativ```, ```standard-employee``` pw==username |
+| https://demo-wallet.fiware.dev/ | | FIWARE Demo Wallet | none |
+| https://compliance.gaia-x.fiware.dev/docs/# | docs/# | FIWARE instance of the Gaia-X compliancy serivce, trusted in the demo-environment   | none |
+| https://registry.gaia-x.fiware.dev/ | |Mock instance of the Gaia-X Registry, used to trust the demo compliancy service | none |
+| https://animalgoods.gaia-x.fiware.dev | /did/did.json | Json-Document, allowing to resolve did:web:animalgoods.gaia-x.fiware.dev:did | none |
+| https://animalgoods.gaia-x.fiware.dev | /certs | Certifcate chain, referenced by the did.json | none |
+| https://onboarding.gaia-x.fiware.dev | /did/did.json | Json-Document, allowing to resolve did:web:onboarding.gaia-x.fiware.dev:did | none |
+| https://onboarding.gaia-x.fiware.dev | /certs | Certifcate chain, referenced by the did.json | none |
+| https://ar.gaia-x.fiware.dev | | Authorization-Registry, used by the OnBoarding-Service | iShare-specific | 
+| https://kong.gaia-x.fiware.dev | /token | Token helper to get iShare-compliant JWT. Used for setting up the policies | X-Api-Key[^7]|
+| https://kong.gaia-x.fiware.dev | /tir | Orion-LD access for implementing the Trusted Issuers Registry. | X-Api-Key[^7]|
+| https://kong.gaia-x.fiware.dev | /walt | Instance of WaltId, can be used to verify credentials against the TIR. | X-Api-Key[^7]|
+| https://kong.gaia-x.fiware.dev | /vc | Access to Orion-LD, used by the portal. Authorization through the PDP. | JWT |
+
+
+[^7]: Some APIs are not typically public available, but provided for the hackathon to support the development and testing. They are secured, using Kong's API-Key functionality. Provide the key as ```X-Api-Key```-header. Get one: 
+    ```shell
+        export KONG_POD=$(kubectl get pods -n gaia-x --no-headers -o custom-columns=":metadata.name" | grep kong)
+        kubectl port-forward ${KONG_POD} 8001:8001 -n gaia-x
+        curl --location 'localhost:8001/key-auths' | jq -r '.data[0].key')
+    ```
+
+## Data models
+
+The demo-setup stores issuers as [NGSI-LD Enities](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_cim009v010601p.pdf), using the following format:
+
+```json
+{
+   "id":"urn:ngsi-ld:TrustedIssuer:did:web:animalgoods.gaia-x.fiware.dev:did",
+   "type":"TrustedIssuer",
+   "issuer":{
+       "type":"Property",
+       "value":"did:web:animalgoods.gaia-x.fiware.dev:did"
+    },
+    "selfDescription":{
+        "type":"Property",
+        "value":{
+            "gx-terms-and-conditions:gaiaxTermsAndConditions":"70c1d713215f95191a11d38fe2341faed27d19e083917bc8732ca4fea4976700","gx:headquarterAddress":{
+                "gx:countrySubdivisionCode":"BE-BRU"
+                },
+            "gx:legalAddress":{
+                "gx:countrySubdivisionCode":"BE-BRU"
+                },
+            "gx:legalName":"Animal Goods Org.",
+            "gx:legalRegistrationNumber":{
+                "gx:vatID":"MYVATID"
+                },
+            "id":"did:web:animalgoods.gaia-x.fiware.dev:did",
+            "type":"gx:LegalParticipant"
+        }
+    }
+}
+```
+
 ## Preparational Steps
 
 In order to work, both participants have to be registered in their corresponding Walt-Id instance.
