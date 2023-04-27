@@ -203,6 +203,26 @@ The diagram shows the relevant components and their interaction. They are not ne
         curl --location 'localhost:8001/key-auths' | jq -r '.data[0].key')
     ```
 
+### Component Links
+
+The setup uses various opensource components, the following table contains links to most of them:
+
+| Component | Role |          |
+|-----------|---|----------|
+| Keycloak-Provider | VC-Issuer | https://github.com/wistefan/keycloak-vc-issuer |
+| Keyrock | AuthorizationRegistry | https://github.com/i4Trust/fiware-idm |
+| Gaia-X CompliancyService | CompliancyService | https://gitlab.com/gaia-x/lab/compliance/gx-compliance |
+| Gaia-X Registry | Trust Registry for Compliancy | https://gitlab.com/gaia-x/lab/compliance/gx-registry / https://github.com/wistefan/gaia-x-registry-mock | 
+| Kong-Plugins | Api-Gateway | https://github.com/FIWARE/kong-plugins-fiware |
+| Orion-LD | ContexBroker, Trusted Issuers Storage | https://github.com/FIWARE/context.Orion-LD |
+| DSBA-PDP | Policy Decision Point | https://github.com/FIWARE/dsba-pdp |  
+| Portal | OnBoarding Frontend | https://github.com/i4Trust/pdc-portal/tree/bilbao |
+| Satellite | Trust Anchor | https://github.com/FIWARE/ishare-satellite |
+| Verifier | Verifier of VerifiableCredentials&Presentations | https://github.com/FIWARE/VCVerifier |
+| WaltId | Backend for managing Credentials and DIDs | https://github.com/walt-id/waltid-ssikit |
+| Token-Helper | Support for iShare-JWT | https://github.com/wistefan/ishare-jwt-helper |
+| Demo-Wallet | Credentials-Wallet | https://github.com/FIWARE/VCWallet | 
+
 ## Data models
 
 The demo-setup stores issuers as [NGSI-LD Enities](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_cim009v010601p.pdf), using the following format:
