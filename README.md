@@ -134,7 +134,7 @@ Goal:
 In order to show the improvements to the integration, the following steps should be presented:
 * issue a Self-Description for Animal Goods Org.[^4]
 * get a Compliancy Credential[^5]
-* get a NaturalPerson Credential for Happypets
+* get a NaturalPerson Credential for Animal Goods Org.
 * register Animal Goods Org. at the [OnBoarding-Portal](https://portal.gaia-x.fiware.dev/)
 * take just the NaturalPerson credential and verify it against the new service[^6]
 
@@ -204,12 +204,12 @@ curl --location 'localhost:6000/v1/did/create' \
 --data "{
     \"method\": \"web\",
     \"keyAlias\":\"${PARTICIPANT_KEY}\",
-    \"domain\": \"participant.gaia-x.fiware.dev\",
+    \"domain\": \"animalgoods.gaia-x.fiware.dev\",
     \"path\": \"did\",
-    \"x5u\": \"https://participant.gaia-x.fiware.dev/certs/tls.crt\"
+    \"x5u\": \"https://animalgoods.gaia-x.fiware.dev/certs/tls.crt\"
 }"
 ```
-After that step, the did.json should be available at ```https://onboarding.gaia-x.fiware.dev/did/did.json``` and ```https://participant.gaia-x.fiware.dev/did/did.json```
+After that step, the did.json should be available at ```https://onboarding.gaia-x.fiware.dev/did/did.json``` and ```https://animalgoods.gaia-x.fiware.dev/did/did.json```
 
 ### Policy creation
 
