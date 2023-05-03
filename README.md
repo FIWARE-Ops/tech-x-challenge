@@ -4,16 +4,16 @@ This repository contains information about the hackathon "Gaia-X compliant Trust
 
 ## The Use-Case
 
-[i4Trust](https://i4trust.org/) is a Trust and IAM framework, used for building collaborative dataspaces, based on [FIWARE](https://www.fiware.org/) and [iShare](https://dev.ishareworks.org/index.html). Access to data and services in those dataspaces is protected through a decentralized IAM framework, where individual clients dont have to be registered individually, but can be vouched for by existing participants, that are already trusted inside the dataspace. The trust between the participants is provided through a trust-anchor service, called "iShare-Satellite". It implements a list of trusted participants, which can be used by the companies to ensure they are only talking to trusted partners.
+[i4Trust](https://i4trust.org/) is a framework used for building collaborative dataspaces, based on [FIWARE](https://www.fiware.org/) components and compatible with the [iSHARE scheme](https://dev.iSHAREworks.org/index.html). Access to data and data processing(app) services in those dataspaces is protected through a decentralized Trust and IAM framework, where individual users don't have to be registered as users of services seperately, but can be vouched for by existing participants, that are already trusted inside the dataspace. The trust between the participants is provided through a trust-anchor service, called "iSHARE Satellite". It implements a list of trusted participants, which can be used by the companies to ensure they are only talking to trusted partners.
 
-This framework for example allows to offer services through a marketplace, where participants of the dataspace can sell and buy access to each others services. In our use-case, a company called ```Packet Delivery Co.``` is offering digital serivces around its "traditional" logistics services. Participants in the dataspace can buy access to those services and offer them to there customers. ```Packet Delivery Co.``` currently offers two types of services, the "Gold-Service" and the "Standard-Service". Users with access to "Gold-Services" are allowed to not only access information about there Packet-Deliveries(e.g. planned time of arrival), but also can change those values to better fit there needs(e.g. deliver when I'm at home). Users with "Standard-Service" can only see the times, but not change them. 
-In our use-case, the company ```No Cheaper Inc.``` is running an online shop, selling variuous goods on small prices. They use ```Packet Delivery Co.``` to deliver those products, but don't want to offer their users additional benefits. Therefor it has only bought "Standard-Services", which allows the users to view the planned arrivals.
+This framework for example allows to offer services through a marketplace, where participants of the dataspace can offer and  acquire rights to access each other's services. In our use-case, a company called ```Packet Delivery Co.``` is offering digital services around its "traditional" logistics services. Participants in the dataspace can acquire access to those services and grant such access to their customers. ```Packet Delivery Co.``` currently supports two types of offerings, the "Gold-Service" and the "Standard-Service". Organizations acquiring the "Gold-Service" are allowed to grant their users not only to access information about their Packet-Deliveries(e.g. planned time of arrival), but also the ability to change those values to better fit their needs(e.g. deliver when I'm at home). On the other hand, users of organizations acquiring the "Standard-Service" can only see the times, but not change them. 
+In our use-case, the company ```No Cheaper Inc.``` is running an online shop, selling various goods at small prices. They use ```Packet Delivery Co.``` to deliver those products, but don't want to grant their users additional benefits. Therefore it has only acquired the "Standard-Service", which allows the users to view the planned arrivals.
 
-```Happy Pets Inc.``` however, offers various products for pet owners and wants to offer them also the option to update the planned time of arrival. As a participant of the dataspace, it just buys access to the "Gold-Service" at the marketplace and is now allowed to issue credentials to its customers, allowing to change the pta.
+```Happy Pets Inc.``` however, offers various products for pet owners and wants to offer to some of its customers also the option to update the planned time of arrival. As a participant of the dataspace, it will acquire access to the "Gold-Service" at the marketplace and that will mean it is now allowed to issue credentials to its customers. Customers with such credentials are now allowed to change the pta, while others are not.
 
-Happy Pets' competitor ```Animal Goods Org.``` decides to also offer its customers the services of ```Packet Delivery Co.```. Since they are quite new on the market, they are not yet part of the dataspace. In order to do so, they have to properly on-board themself to the dataspace and then can also buy access. For doing so, it create a [Gaia-X compliant self-description](https://gaia-x.gitlab.io/policy-rules-committee/trust-framework/)[^1], containing various legal informations required for companies in the european union. To proof the legitimacy of those informations, they get a ```Compliancy Credential``` from  the [Gaia-X Compliancy Service](https://compliance.lab.gaia-x.eu/development/docs/#/Common/CommonController_issueVC)[^2]. With those two credentials, a legal representative can use the OnBoarding-Service of the dataspace to register ```Animal Goods Org.``` as a new participant. The representative identifies itself with a credential[^3], too. 
+Happy Pets' competitor ```Animal Goods Org.``` decides to also offer its customers the services of ```Packet Delivery Co.```. Since they are quite new on the market, they are not yet part of the dataspace. In order to do so, they have to properly on-board themself to the dataspace and then can also acquire access. For doing so, it creates a [Gaia-X compliant self-description](https://gaia-x.gitlab.io/policy-rules-committee/trust-framework/)[^1], containing various legal informations required for companies in the European Union. To prove the legitimacy of those informations, they get a ```Compliancy Credential``` from  the [Gaia-X Compliancy Service](https://compliance.lab.gaia-x.eu/development/docs/#/Common/CommonController_issueVC)[^2]. With those two credentials, a legal representative can use the OnBoarding-Service of the dataspace to register ```Animal Goods Org.``` as a new participant. The representative identifies itself with a credential[^3], too. 
 
-Once this is done, ```Animal Goods Org.``` can access the marketplace and also buy the "Gold-Service" for its customers.
+Once this is done, ```Animal Goods Org.``` can access the marketplace and also acquire the rights to use the "Gold-Service" for its customers.
 
 [^1]: Example self-description: 
     ```json
@@ -124,11 +124,11 @@ Once this is done, ```Animal Goods Org.``` can access the marketplace and also b
 
 While the i4Trust framework for Dataspaces is well established, working and already used in multiple dataspaces(see [i4Trust experiments](https://i4trust.org/experiments/)) and a solution for the OnBoarding-Service, combining the i4Trust IAM-Framework with Gaia-X compliancy, there integration is yet to be finished.
 
-In order to properly on-board new participants to an i4Trust-Dataspace, the [Satellite-Implementation](https://github.com/FIWARE/ishare-satellite) needs to be evolved to get participant information from the OnBoarding-Service. 
+In order to properly on-board new participants to an i4Trust-Dataspace, the [Satellite-Implementation](https://github.com/FIWARE/iSHARE-satellite) needs to be evolved to get participant information from the OnBoarding-Service. 
 Therefor, in the hackathon, we want to implement:
-* an [EBSI Trusted Issuers Registry](https://api-pilot.ebsi.eu/docs/apis/trusted-issuers-registry/latest#/) compliant endpoint, based on the NGSI-LD Api. This could either be an extension to the already existing Satellite-implementation or a completely new service.
-* [optional] Implement additional endpoints from the [satellite-api](https://github.com/FIWARE/ishare-satellite/tree/main/api)([Spec](https://dev.ishare.eu/scheme-owner/parties-id.html)) 
-* [optional] Extend the LegalPerson-Credential to include iShare-related data, like the certificate or the EORI
+* an [EBSI Trusted Issuers Registry](https://api-pilot.ebsi.eu/docs/apis/trusted-issuers-registry/latest#/) compliant endpoint, based on the NGSI-LD API. This could either be an extension to the already existing Satellite-implementation or a completely new service.
+* [optional] Implement additional endpoints from the [satellite-api](https://github.com/FIWARE/iSHARE-satellite/tree/main/api)([Spec](https://dev.iSHARE.eu/scheme-owner/parties-id.html)) 
+* [optional] Extend the LegalPerson-Credential to include iSHARE-related data, like the certificate or the EORI
 
 Goal: 
 In order to show the improvements to the integration, the following steps should be presented:
@@ -150,7 +150,7 @@ All components are deployed via GitOps. The deployments can be found at: https:/
 
 ![Setup](./img/tech-x-setup.png)
 
-The diagram shows the relevant components and their interaction. They are not necessarily in the provided sequence, but their are certain dependencies between some steps.
+The diagram shows the relevant components and their interaction. They are not necessarily in the provided sequence, but there are certain dependencies between some steps.
 
 1. The person("NaturalPerson") receives a LegalPerson-Credential[^1] and a NaturalPerson-Credential[^3], containing the self-descrption of the organisation and the identity of the user itself. The NaturalPerson-Credential is issued by the organisation described in the LegalPerson-Credential.
     * The issuer([Keycloak](https://github.com/wistefan/keycloak-vc-issuer)) uses [WaltId](https://github.com/walt-id/waltid-ssikit) to get the actual credential
@@ -161,7 +161,7 @@ The diagram shows the relevant components and their interaction. They are not ne
         ![CompliancyService in the wallet](./img/wallet-comp.png)
     * the [Compliancyservice](https://gaia-x.gitlab.io/policy-rules-committee/trust-framework/trust_anchors/) will check the credential according to the Gaia-X rules and send back a credential to the wallet
 3. In order to OnBoard the participant(e.g. ```Animal Goods Org.```), the user accesses the [OnBoarding-Portal](https://portal.gaia-x.fiware.dev/)
-    * the portal will forward the user to the Login-Page of the verifier, which displays a QR-Code, containing all information to fullfil the [SIOP-2](https://openid.net/specs/openid-connect-self-issued-v2-1_0.html)/[OIDC4VP](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html)-Flow 
+    * the portal will forward the user to the Login-Page of the verifier, which displays a QR-Code, containing all information to fulfil the [SIOP-2](https://openid.net/specs/openid-connect-self-issued-v2-1_0.html)/[OIDC4VP](https://openid.net/specs/openid-4-verifiable-presentations-1_0.html)-Flow 
     * the user scans the code with its wallet and let it send all credentials as a [VerfiablePresentation](https://www.w3.org/TR/vc-data-model/#dfn-verifiable-presentations)
     * the verifier will now check all (3) credential it did receive:
         * verify the signature, issuance-date and vaildity-timeframe for each of the credentials
@@ -172,9 +172,9 @@ The diagram shows the relevant components and their interaction. They are not ne
     * it requests the [Orion-LD ContextBroker](https://github.com/FIWARE/context.Orion-LD), using the [NGSI-LD Api](https://www.etsi.org/deliver/etsi_gs/CIM/001_099/009/01.06.01_60/gs_cim009v010601p.pdf) to get or create participants
     * all requests go through the [Kong API-Gateway](https://konghq.com/)
     * the requests are forwarded to the [DSBA-PDP](https://github.com/FIWARE/dsba-pdp) by the [PEP-Plugin](https://github.com/FIWARE/kong-plugins-fiware/tree/main/kong-pep-plugin) to get an authorization-decision
-    * the PDP checks the request in context of the roles inside then NaturalPerson-Credential, using the [iShare-compliant Authorization Registry](https://dev.ishare.eu/delegation/endpoint.html) 
+    * the PDP checks the request in context of the roles inside then NaturalPerson-Credential, using the [iSHARE-compliant Authorization Registry](https://dev.iSHARE.eu/delegation/endpoint.html) 
     * if allowed, it forwards the request to the ContextBroker to be answered
-5. :warning: Step 5 is not implemented yet, therefor becomes the challange. In order to connect the OnBoarding-Service with actual Dataspaces, a services implementing the [EBSI Trusted Issuers Registry API](https://api-pilot.ebsi.eu/docs/apis/trusted-issuers-registry/latest#/) retrieves the TrustedIssuers-Information from the ContextBroker and provide them to the Dataspace.  
+5. :warning: Step 5 is not implemented yet, therefore becomes the challenge. In order to connect the OnBoarding-Service with actual Dataspaces, a services implementing the [EBSI Trusted Issuers Registry API](https://api-pilot.ebsi.eu/docs/apis/trusted-issuers-registry/latest#/) retrieves the TrustedIssuers-Information from the ContextBroker and provide them to the Dataspace.  
 
 ### Available endpoints:
 
@@ -189,8 +189,8 @@ The diagram shows the relevant components and their interaction. They are not ne
 | https://animalgoods.gaia-x.fiware.dev | /certs | Certifcate chain, referenced by the did.json | none |
 | https://onboarding.gaia-x.fiware.dev | /did/did.json | Json-Document, allowing to resolve did:web:onboarding.gaia-x.fiware.dev:did | none |
 | https://onboarding.gaia-x.fiware.dev | /certs | Certifcate chain, referenced by the did.json | none |
-| https://ar.gaia-x.fiware.dev | | Authorization-Registry, used by the OnBoarding-Service | iShare-specific | 
-| https://kong.gaia-x.fiware.dev | /token | Token helper to get iShare-compliant JWT. Used for setting up the policies | X-Api-Key[^7]|
+| https://ar.gaia-x.fiware.dev | | Authorization-Registry, used by the OnBoarding-Service | iSHARE-specific | 
+| https://kong.gaia-x.fiware.dev | /token | Token helper to get iSHARE-compliant JWT. Used for setting up the policies | X-Api-Key[^7]|
 | https://kong.gaia-x.fiware.dev | /tir | Orion-LD access for implementing the Trusted Issuers Registry. | X-Api-Key[^7]|
 | https://kong.gaia-x.fiware.dev | /walt | Instance of WaltId, can be used to verify credentials against the TIR. | X-Api-Key[^7]|
 | https://kong.gaia-x.fiware.dev | /vc | Access to Orion-LD, used by the portal. Authorization through the PDP. | JWT |
@@ -217,10 +217,10 @@ The setup uses various opensource components, the following table contains links
 | Orion-LD | ContexBroker, Trusted Issuers Storage | https://github.com/FIWARE/context.Orion-LD |
 | DSBA-PDP | Policy Decision Point | https://github.com/FIWARE/dsba-pdp |  
 | Portal | OnBoarding Frontend | https://github.com/i4Trust/pdc-portal/tree/bilbao |
-| Satellite | Trust Anchor | https://github.com/FIWARE/ishare-satellite |
+| Satellite | Trust Anchor | https://github.com/FIWARE/iSHARE-satellite |
 | Verifier | Verifier of VerifiableCredentials&Presentations | https://github.com/FIWARE/VCVerifier |
 | WaltId | Backend for managing Credentials and DIDs | https://github.com/walt-id/waltid-ssikit |
-| Token-Helper | Support for iShare-JWT | https://github.com/wistefan/ishare-jwt-helper |
+| Token-Helper | Support for iSHARE-JWT | https://github.com/wistefan/iSHARE-jwt-helper |
 | Demo-Wallet | Credentials-Wallet | https://github.com/FIWARE/VCWallet | 
 
 ## Data models
@@ -336,7 +336,7 @@ The demo setup will use 3 policies:
 			{   
                 "target": {
                     "environment": {
-                        "licenses": [ "ISHARE.0001" ]
+                        "licenses": [ "iSHARE.0001" ]
                     }  
                 },
 				"policies": [
@@ -384,7 +384,7 @@ The demo setup will use 3 policies:
 			{   
                 "target": {
                     "environment": {
-                        "licenses": [ "ISHARE.0001" ]
+                        "licenses": [ "iSHARE.0001" ]
                     }  
                 },
 				"policies": [
@@ -434,7 +434,7 @@ The demo setup will use 3 policies:
 			{   
                 "target": {
                     "environment": {
-                        "licenses": [ "ISHARE.0001" ]
+                        "licenses": [ "iSHARE.0001" ]
                     }  
                 },
 				"policies": [
@@ -468,7 +468,7 @@ The demo setup will use 3 policies:
 
 Policy creation follows the same steps for each of them:
 
-1. Get an API-Key. In order to make handling of iShare-JWT easier, the setup includes a token-helper. To not make all JWT publicly available, the token-helper is available through Kong via an API-Key. To retrieve the key use:
+1. Get an API-Key. In order to make handling of iSHARE-JWT easier, the setup includes a token-helper. To not make all JWT publicly available, the token-helper is available through Kong via an API-Key. To retrieve the key use:
 
 ```shell
     export KONG_POD=$(kubectl get pods -n gaia-x --no-headers -o custom-columns=":metadata.name" | grep kong)
@@ -479,7 +479,7 @@ Policy creation follows the same steps for each of them:
 2. Use the key to access the token-helper and get an JWT for the AR. Be fast: the token expires after 30s.
 
 ```shell
-   export ISHARE_JWT=$(curl --location 'kong.gaia-x.fiware.dev/token?clientId=EU.EORI.DEONE&idpId=EU.EORI.DEONE' --header "X-Api-Key: ${API_KEY}" | jq -r '.token')
+   export iSHARE_JWT=$(curl --location 'kong.gaia-x.fiware.dev/token?clientId=EU.EORI.DEONE&idpId=EU.EORI.DEONE' --header "X-Api-Key: ${API_KEY}" | jq -r '.token')
 ```
 
 3. Use the JWT to get the access-token from the AR:
@@ -490,7 +490,7 @@ Policy creation follows the same steps for each of them:
             --data-urlencode 'grant_type=urn:ietf:params:oauth:grant-type:jwt-bearer' \
             --data-urlencode 'scope=iSHARE' \
             --data-urlencode 'client_assertion_type=urn:ietf:params:oauth:client-assertion-type:jwt-bearer' \
-            --data-urlencode "client_assertion=${ISHARE_JWT}" \
+            --data-urlencode "client_assertion=${iSHARE_JWT}" \
             --data-urlencode 'client_id=EU.EORI.DEONE' | jq -r '.access_token')
 ```
 
