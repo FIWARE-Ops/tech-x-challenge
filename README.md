@@ -4,7 +4,7 @@ This repository contains information about the hackathon "Gaia-X compliant Trust
 
 ## The Use-Case
 
-[i4Trust](https://i4trust.org/) is a framework used for building collaborative dataspaces, based on [FIWARE](https://www.fiware.org/) components and compatible with the [iSHARE scheme](https://dev.iSHAREworks.org/index.html). Access to data and data processing(app) services in those dataspaces is protected through a decentralized Trust and IAM framework, where individual users don't have to be registered as users of services seperately, but can be vouched for by existing participants, that are already trusted inside the dataspace. The trust between the participants is provided through a trust-anchor service, called "iSHARE Satellite". It implements a list of trusted participants, which can be used by the companies to ensure they are only talking to trusted partners.
+[i4Trust](https://i4trust.org/) is a framework used for building collaborative dataspaces, based on [FIWARE](https://www.fiware.org/) components and compatible with the [iSHARE scheme](https://dev.iSHAREworks.org/index.html). Access to data and data processing(app) services in those dataspaces is protected through a decentralized Trust and IAM framework, where individual users[^8] don't have to be registered as users of services seperately, but can be vouched for by existing participants, that are already trusted inside the dataspace. The trust between the participants is provided through a trust-anchor service, called "iSHARE Satellite". It implements a list of trusted participants, which can be used by the companies to ensure they are only talking to trusted partners.
 
 This framework for example allows to offer services through a marketplace, where participants of the dataspace can offer and  acquire rights to access each other's services. In our use-case, a company called ```Packet Delivery Co.``` is offering digital services around its "traditional" logistics services. Participants in the dataspace can acquire access to those services and grant such access to their customers. ```Packet Delivery Co.``` currently supports two types of offerings, the "Gold-Service" and the "Standard-Service". Organizations acquiring the "Gold-Service" are allowed to grant their users not only to access information about their Packet-Deliveries(e.g. planned time of arrival), but also the ability to change those values to better fit their needs(e.g. deliver when I'm at home). On the other hand, users of organizations acquiring the "Standard-Service" can only see the times, but not change them. 
 In our use-case, the company ```No Cheaper Inc.``` is running an online shop, selling various goods at small prices. They use ```Packet Delivery Co.``` to deliver those products, but don't want to grant their users additional benefits. Therefore it has only acquired the "Standard-Service", which allows the users to view the planned arrivals.
@@ -117,7 +117,7 @@ Once this is done, ```Animal Goods Org.``` can access the marketplace and also a
         }
     }
     ```
-
+[^8]: While most of the use-case is focused on Human-2-Machine interaction, e.g. a user beeing a Human, the framework is not limited to that. A "user" could also be another service, participating in Machine-2-Machine interaction.
 ## The Challenge
 
 ![Overview](./img/overview.svg)
