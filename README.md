@@ -506,9 +506,9 @@ Policy creation follows the same steps for each of them:
 ## Summary
 Gaia-X compliant Trust and IAM framework 
 
-This team focused on the integration between Gaia-X and i4Trust frameworks, with focus on identity and access management. The main goal was to being able to introduce new participents to a dataspace by using the Gaia-X services as trust source.  
+This team focused on the integration between Gaia-X and i4Trust frameworks, with focus on identity and access management. The main goal was being able to introduce new participants to a dataspace by using the Gaia-X services as trust anchor.  
 
-A prior prepared onboarding service already had the functionality to persist a Gaia-X compliant Self-Descriptions for legal participant in an NGSI-LD broker inside the dataspace. The piece added during the hackathon was to use the Self-Description in an [EBSI-compatible Trusted Issuers Registry](https://api-pilot.ebsi.eu/docs/apis/trusted-issuers-registry/v4#/). The results is that users of the onboarded company can consumer services inside the dataspace. 
+The onboarding service and its IAM-Framework already had the functionality to validate and persist Gaia-X compliant Self-Descriptions for legal participants in an NGSI-LD compliant broker. During the hackathon, an [EBSI-compliant Trusted Issuers Registry](https://api-pilot.ebsi.eu/docs/apis/trusted-issuers-registry/v4#/) based on those Self-Descriptions was implemented. By using this implementation as a participant registry inside a dataspace, the onboarded company and its users can participate inside the dataspace.
 
 Outcome & take-aways 
 
