@@ -506,12 +506,12 @@ Policy creation follows the same steps for each of them:
 ## Summary
 Gaia-X compliant Trust and IAM framework 
 
-This team focused on the integration between Gaia-X and i4Trust frameworks, with focus on identity and access management. The main goal was to adapt the trust-anchor service – called iSHARE Satellite – to get participant information from the OnBoarding-Portal.  
+This team focused on the integration between Gaia-X and i4Trust frameworks, with focus on identity and access management. The main goal was being able to introduce new participants to a dataspace by using the Gaia-X services as trust anchor.  
 
-The onboarding service already had the functionality to use a Gaia-X compliant Self-Descriptions for legal participant to onboard a company in an i4Trust dataspace. The piece added during the hackathon was to retrieve the information on the trusted issuers from the portal and provide it to the dataspace to be added in the Trusted Participants list. The results is that users of the dataspace can be sure they are consuming services only from trusted partners. 
+The onboarding service and its IAM-Framework already had the functionality to validate and persist Gaia-X compliant Self-Descriptions for legal participants in an NGSI-LD compliant broker. During the hackathon, an [EBSI-compliant Trusted Issuers Registry](https://api-pilot.ebsi.eu/docs/apis/trusted-issuers-registry/v4#/) based on those Self-Descriptions was implemented. By using this implementation as a participant registry inside a dataspace, the onboarded company and its users can participate inside the dataspace.
 
 Outcome & take-aways 
 
-The team successfully shown a live demo at the end of the 2 days of hacking, where a legal representative of a company – Animal Goods Org – can issue the legal participant SD, can store it in a FIWARE wallet, and from there call the Gaia-X Compliance Service to get the compliance proof. After these steps, the legal representative can issue NaturalPerson Credentials for themselves and onboard the company in the dataspace, where Animal Goods Org is added as a trusted participant. 
+The team has successfully shown a live demo at the end of the 2 days of hacking, where a legal representative of a company – Animal Goods Org – can issue the legal participant SD, can store it in a FIWARE wallet, and from there call the Gaia-X Compliance Service to get the compliance proof. After these steps, the legal representative can issue NaturalPerson Credentials for themselves and onboard the company in the dataspace, where Animal Goods Org is added as a trusted participant. 
 
 A detailed description of this session can be found [here](https://github.com/FIWARE-Ops/tech-x-challenge). For any questions or follow-ups, the team can be reached at TODO: add contact info
